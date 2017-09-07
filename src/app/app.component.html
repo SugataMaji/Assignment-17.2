@@ -1,0 +1,32 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{title}}!!
+  </h1>
+<div *ngIf="users.length > 0; else empty"><h2>Users</h2></div>
+<ng-template #empty><h2>No users.</h2></ng-template>
+
+<div *ngFor="let user of users | slice:0:2 as total; index as i">
+    {{i+1}}/{{total.length}}: {{user.name}}
+</div>
+
+<h2>{{ 'sugata maji' | titlecase }}</h2>
+
+<form novalidate autocomplete="off" [formGroup]="myForm" (ngSubmit)="addCriketer(myForm.value)">
+                        <h1>pattern.email validator </h1>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="email" formControlName="email">
+                            <div *ngIf="myForm.controls['email'].errors && (myForm.controls['email'].dirty || myForm.controls['email'].touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="myForm.controls['email'].hasError('required')">
+                                    email is required.
+                                </div>
+                                <div *ngIf="myForm.controls['email'].hasError('minlength')">
+                                    Please enter atleast 8 characeters.
+                                </div>
+                                <div *ngIf="myForm.controls['email'].hasError('pattern')">
+                                    Email accepts something@xyz.com
+                                </div>
+                            </div>
+                        </div>
+</form>
